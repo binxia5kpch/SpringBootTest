@@ -1,0 +1,62 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		maven {
+			url "http://61.135.210.239:8892/repository/maven-public/"
+		}
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+//	compile('org.codehaus.groovy:groovy')
+	// https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.11'
+
+	// https://mvnrepository.com/artifact/org.apache.kafka/kafka_2.10
+	compile group: 'org.apache.kafka', name: 'kafka_2.10', version: '0.10.2.0'
+	compile group: 'org.apache.kafka', name: 'kafka_2.10', version: '0.10.2.0'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile 'mysql:mysql-connector-java'
+	compile 'org.apache.tomcat:tomcat-jdbc'
+	compile 'com.google.code.gson:gson:2.7'
+	compile 'com.alibaba:fastjson:+'
+	compile 'cn.jpush.api:jiguang-common:1.0.8'
+	// https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
+//	compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
+
+}
+
+configurations {
+	all*.exclude group: "org.slf4j", module:"slf4j-log4j12"
+}
+
+
+
+
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.zhongsou.springboot.test.SpringBootTestApplication'
+		//attributes 'Premain-class': 'com.zhongsou.test.SizeOfObject'
+		attributes 'Can-Redefine-Classes': 'false'
+	}
+}
