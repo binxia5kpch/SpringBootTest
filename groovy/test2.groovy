@@ -7,3 +7,6 @@ println  "hahah2"
 GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 goodsMysql.getMyFansCount();
 
+
+
+
