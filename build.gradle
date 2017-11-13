@@ -42,6 +42,8 @@ dependencies {
 	compile 'cn.jpush.api:jiguang-common:1.0.8'
 	// https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
 //	compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
+	// https://mvnrepository.com/artifact/commons-net/commons-net
+	compile group: 'commons-net', name: 'commons-net', version: '3.5'
 
 }
 
