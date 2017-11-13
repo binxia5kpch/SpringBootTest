@@ -69,7 +69,9 @@ productList.add(productMap)
 def productMap1=[:]
 productMap1.put("id","58fad70eaf484341f632a16c")
 productMap1.put("qrcode","3250390801078")
-productMap1.put("title","卡斯德堡赤霞珠干红葡萄酒 70ml")
+productMap1.put("title","卡斯德堡赤霞珠干红葡萄酒 80ml")
+
+
 
 
 productMap1.put("price","198")
