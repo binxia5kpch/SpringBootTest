@@ -50,7 +50,7 @@ def categoryMap1=[:]
 categoryMap1.put("id","5954cd0d5b73294d45cbd71f")
 categoryMap1.put("field_mark","3")
 categoryMap1.put("event_mark","3")
-categoryMap1.put("img","/system/carousel_applies/avatars/5954/cc9d/5b73/294d/497e/121c/original/QQ%E5%9B%BE%E7%89%8720170628132417.jpg?1498729629")
+categoryMap1.put("img","https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3842027919,3501108524&fm=58&u_exp_0=3274994304,3167803114&fm_exp_0=86&bpow=240&bpoh=237")
 carousel_list.add(categoryMap1)
 
 backMap.put("carousel_list",carousel_list)
