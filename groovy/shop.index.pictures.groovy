@@ -42,7 +42,7 @@ def categoryMap=[:]
 categoryMap.put("id","5922bed95b73291ab08800c2")
 categoryMap.put("field_mark","6")
 categoryMap.put("event_mark","0")
-categoryMap.put("img","/system/carousel_applies/avatars/5922/bed9/5b73/291a/b088/00c1/original/0522%E5%A4%A9%E6%9C%9D%E4%B8%8A%E5%93%81%E8%B4%B5%E4%BA%BA%E9%85%92%E8%BD%AE%E6%92%AD.jpg?1495449305")
+categoryMap.put("img","https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=3673401264,4261410059&fm=85&s=58D3709A4EDA75E7781B51840300F0A8")
 carousel_list.add(categoryMap)
 
 def categoryMap1=[:]
