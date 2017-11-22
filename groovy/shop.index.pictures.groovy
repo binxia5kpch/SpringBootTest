@@ -39,7 +39,7 @@ GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 def backMap=[:]
 def carousel_list=[];
 
-goodsMysql.shopMysql.eachRow("select * from shop_cagtegory where ishot=1",{
+goodsMysql.shopMysql.eachRow("select * from shop_category where ishot=1",{
     carousel_list<<[
             id:it.id,
             name:it.name,
