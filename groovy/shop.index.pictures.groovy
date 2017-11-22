@@ -1,4 +1,6 @@
 import com.alibaba.fastjson.JSON
+import com.zhongsou.dao.mysql.GoodsMysql
+import com.zhongsou.util.BeanUtils
 
 String a="""
 
@@ -33,25 +35,32 @@ url: null
 """
 
 //out <<a
-
+GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 def backMap=[:]
 def carousel_list=[];
 
-def categoryMap=[:]
+goodsMysql.shopMysql.eachRow("select * from shop_cagtegory where ishot=1",{
+    carousel_list<<[
+            id:it.id,
+            name:it.name,
+            event_mark:"3",
+            img:it.img
+    ]
+})
 
-categoryMap.put("id","5922bed95b73291ab08800c2")
-categoryMap.put("field_mark","6")
-categoryMap.put("event_mark","0")
-categoryMap.put("img","https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=3673401264,4261410059&fm=85&s=58D3709A4EDA75E7781B51840300F0A8")
-carousel_list.add(categoryMap)
-
-def categoryMap1=[:]
-
-categoryMap1.put("id","5954cd0d5b73294d45cbd71f")
-categoryMap1.put("field_mark","3")
-categoryMap1.put("event_mark","3")
-categoryMap1.put("img","https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3842027919,3501108524&fm=58&u_exp_0=3274994304,3167803114&fm_exp_0=86&bpow=240&bpoh=237")
-carousel_list.add(categoryMap1)
+//def categoryMap=[:]
+//
+//categoryMap.put("id","5922bed95b73291ab08800c2")
+//categoryMap.put("event_mark","3")
+//categoryMap.put("img","https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=3673401264,4261410059&fm=85&s=58D3709A4EDA75E7781B51840300F0A8")
+//carousel_list.add(categoryMap)
+//
+//def categoryMap1=[:]
+//
+//categoryMap1.put("id","5954cd0d5b73294d45cbd71f")
+//categoryMap1.put("event_mark","3")
+//categoryMap1.put("img","https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3842027919,3501108524&fm=58&u_exp_0=3274994304,3167803114&fm_exp_0=86&bpow=240&bpoh=237")
+//carousel_list.add(categoryMap1)
 
 backMap.put("carousel_list",carousel_list)
 
