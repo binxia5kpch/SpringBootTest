@@ -7,7 +7,7 @@ GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 def productList=[]
 
 
-goodsMysql.shopMysql.eachRow("select * from shop_goods",{
+goodsMysql.shopMysql.eachRow("select * from shop_goods where is_index=1",{
     productList<<[
             id:it.id,
             qrcode:it.qrcode,
