@@ -37,7 +37,7 @@ if(addressType.equals("insert")){
 
 }else if(addressType.equals("query")){
     def addressList=[]
-    goodsMysql.shopMysql.eachRow("select * from shop_user_address",{
+    goodsMysql.shopMysql.eachRow("select * from shop_user_address WHERE userid = ?",[userid],{
         addressList<<[
                 id:it.id,
                 userid:it.userid,
@@ -49,6 +49,9 @@ if(addressType.equals("insert")){
         ]
     })
     backMap.put("addressList",addressList)
+}else if (addressType.equals("update")){
+    goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET username = ?,mobile=?,address=?,school=?,isdefault=? WHERE userid = ?",
+    [username,mobile,address,school,defalutFlag,userid])
 }
 
 out << JSON.toJSONString(backMap);
