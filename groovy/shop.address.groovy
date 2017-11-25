@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSON
 import com.zhongsou.dao.mysql.GoodsMysql
 import com.zhongsou.util.BeanUtils
 
@@ -50,4 +51,4 @@ if(addressType.equals("insert")){
     backMap.put("addressList",addressList)
 }
 
-return backMap;
+out << JSON.toJSONString(backMap);
