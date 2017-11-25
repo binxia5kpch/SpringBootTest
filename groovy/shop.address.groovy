@@ -12,20 +12,24 @@ String addressType= hs.getParameter("addressType")
 GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 
 def backMap=[:];
+String userid= hs.getParameter("userid")
+String username= hs.getParameter("username")
+String mobile= hs.getParameter("mobile")
+String address= hs.getParameter("address")
+String school= hs.getParameter("school")
+
 if(addressType.equals("insert")){
-    String userid= hs.getParameter("userid")
-    String username= hs.getParameter("username")
-    String mobile= hs.getParameter("mobile")
-    String address= hs.getParameter("address")
-    String school= hs.getParameter("school")
-    String isdefault= hs.getParameter("isdefault")
-    int defalutFlag=0
-    if(isdefault){
-        defalutFlag=1
-    }
+//    String isdefault= hs.getParameter("isdefault")
+//    int defalutFlag=0
+//    if(isdefault){
+//        defalutFlag=1
+//    }
+//
+//    def count = goodsMysql.shopMysql.firstRow("select count(*) from ")
 
     def insertId = goodsMysql.shopMysql.executeInsert("insert into shop_user_address(userid,username,mobile,address,school,isdefault) values(?,?,?,?,?,?)",
             [userid,username,mobile,address,school,defalutFlag])
+
     backMap.put("insertId",insertId)
 }else if(addressType.equals("delete")){
     String id=hs.getParameter("id")
@@ -50,8 +54,16 @@ if(addressType.equals("insert")){
     })
     backMap.put("addressList",addressList)
 }else if (addressType.equals("update")){
-    goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET username = ?,mobile=?,address=?,school=?,isdefault=? WHERE userid = ?",
+    int updateRet = goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET username = ?,mobile=?,address=?,school=?,isdefault=? WHERE userid = ?",
     [username,mobile,address,school,defalutFlag,userid])
+    backMap.put("updateRet",updateRet)
+}else if(addressType.equals("updateDefault")){
+    String id=hs.getParameter("id")
+    if(id){
+        goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET isdefault = ? where id=?",[defalutFlag,id])
+    }else{
+        backMap.put("mess","id 不能为空")
+    }
 }
 
 out << JSON.toJSONString(backMap);
