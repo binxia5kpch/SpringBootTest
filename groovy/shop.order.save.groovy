@@ -102,5 +102,5 @@ public void pushMessage(def regId,def goodString){
     PushResult result=jpushClient.sendAndroidMessageWithRegistrationID(title,JsonOutput.toJson(extra),regId);
 }
 
-System.out.println("remark==>"+remark+"username==>"+username)
+//System.out.println("remark==>"+remark+"username==>"+username)
 
