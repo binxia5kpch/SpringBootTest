@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest
 
 HttpServletRequest hs = request as HttpServletRequest
 
-System.out.println("regId==>"+hs.getParameter("regId"));
+
 
 String addressType= hs.getParameter("addressType")
 GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
@@ -17,16 +17,15 @@ String username= hs.getParameter("username")
 String mobile= hs.getParameter("mobile")
 String address= hs.getParameter("address")
 String school= hs.getParameter("school")
-
+String isdefault= hs.getParameter("isdefault")
+int defalutFlag=0
+if(isdefault){
+    defalutFlag=1
+}
 if(addressType.equals("insert")){
-//    String isdefault= hs.getParameter("isdefault")
-//    int defalutFlag=0
-//    if(isdefault){
-//        defalutFlag=1
-//    }
-//
-//    def count = goodsMysql.shopMysql.firstRow("select count(*) from ")
 
+    def countRet = goodsMysql.shopMysql.firstRow("select count(*) as count from shop_user_address where userid=?",[userid])
+    System.out.println("regId==>"+countRet);
     def insertId = goodsMysql.shopMysql.executeInsert("insert into shop_user_address(userid,username,mobile,address,school,isdefault) values(?,?,?,?,?,?)",
             [userid,username,mobile,address,school,defalutFlag])
 
