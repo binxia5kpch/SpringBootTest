@@ -26,6 +26,9 @@ if(addressType.equals("insert")){
 
     def countRet = goodsMysql.shopMysql.firstRow("select count(*) as count from shop_user_address where userid=?",[userid])
     System.out.println("regId==>"+countRet);
+    if(countRet.count<1){
+        defalutFlag=1
+    }
     def insertId = goodsMysql.shopMysql.executeInsert("insert into shop_user_address(userid,username,mobile,address,school,isdefault) values(?,?,?,?,?,?)",
             [userid,username,mobile,address,school,defalutFlag])
 
