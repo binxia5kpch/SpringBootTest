@@ -8,7 +8,9 @@ HttpServletRequest hs = request as HttpServletRequest
 System.out.println("regId==>"+hs.getParameter("regId"));
 
 String addressType= hs.getParameter("addressType")
+GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 
+def backMap=[:];
 if(addressType.equals("insert")){
     String userid= hs.getParameter("userid")
     String username= hs.getParameter("username")
@@ -16,7 +18,36 @@ if(addressType.equals("insert")){
     String address= hs.getParameter("address")
     String school= hs.getParameter("school")
     String isdefault= hs.getParameter("isdefault")
-    GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
-    def orderId = goodsMysql.shopMysql.executeInsert("insert into shop_user_address(userid,username,mobile,address,school,isdefault) values(?,?,?,?,?,?)",
-            [userid,username,mobile,address,school,isdefault])
+    int defalutFlag=0
+    if(isdefault){
+        defalutFlag=1
+    }
+
+    def insertId = goodsMysql.shopMysql.executeInsert("insert into shop_user_address(userid,username,mobile,address,school,isdefault) values(?,?,?,?,?,?)",
+            [userid,username,mobile,address,school,defalutFlag])
+    backMap.put("insertId",insertId)
+}else if(addressType.equals("delete")){
+    String id=hs.getParameter("id")
+    if(id){
+        goodsMysql.shopMysql.executeUpdate("delete from shop_user_address where id=?",[id])
+    }else{
+        backMap.put("mess","id 不能为空")
+    }
+
+}else if(addressType.equals("query")){
+    def addressList=[]
+    goodsMysql.shopMysql.eachRow("select * from shop_user_address",{
+        addressList<<[
+                id:it.id,
+                userid:it.userid,
+                username:it.username,
+                mobile:it.mobile,
+                address:it.address,
+                school:it.school,
+                isdefault:it.isdefault
+        ]
+    })
+    backMap.put("addressList",addressList)
 }
+
+return backMap;
