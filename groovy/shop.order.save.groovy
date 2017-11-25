@@ -24,15 +24,40 @@ import javax.servlet.http.HttpServletRequest
 
 HttpServletRequest re = request as HttpServletRequest
 
+// 读取请求内容
+BufferedReader br = new BufferedReader(new InputStreamReader(re.getInputStream()));
+String line = null;
+StringBuilder sb = new StringBuilder();
+while((line = br.readLine())!=null){
+    sb.append(line);
+}
+
+// 将资料解码
+String reqBodyStr =  sb.toString();
+//String reqBodyStr="""
+//{"remark":"1","goodList":"[{\\"id\\":1,\\"qrcode\\":\\"1\\",\\"title\\":\\"康师傅方便面\\",\\"price\\":5,\\"avatar_url\\":\\"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2666833431,2276984962&fm=27&gp=0.jpg\\",\\"thumb_url\\":\\"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2666833431,2276984962&fm=27&gp=0.jpg\\",\\"marketPrice\\":10,\\"mobile_category_id\\":1,\\"category_name\\":\\"方便面\\",\\"buy\\":1,\\"icon_circle\\":\\"success_circle\\"}]","userid":"o8T0R0dnMvt7YLA-zlYw0Kw0sqS4"}
+//
+//"""
+System.out.println("reqBodStr==>"+reqBodyStr);
 
 
-String remark = re.getParameter("remark");
-String username = re.getParameter("username");
-String userid = re.getParameter("userid");
+def headObject = JSON.parseObject(reqBodyStr);
+System.out.println(ob.goodList);
+System.out.println("====>");
+def good =  ob.goodList
+def gdOb = JSON.parse(good);
+gdOb.each {
+    System.out.println("it==>"+it.thumb_url)
+}
+
+
+String remark = headObject.getParameter("remark");
+//String username = headObject.getParameter("username");
+String userid = headObject.getParameter("userid");
 System.out.println("userId==>"+userid)
-String goodString = re.getParameter("goodList")
-System.out.println(goodString);
-def goodsList = JSON.parse(goodString);
+//def goodString = ob.goodList
+//System.out.println(goodString);
+def goodsList = JSON.parse(headObject.goodList);
 int total_amt;
 goodsList?.each {it->
     total_amt=total_amt+(it.price as int)
