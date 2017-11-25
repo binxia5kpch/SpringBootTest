@@ -42,9 +42,9 @@ System.out.println("reqBodStr==>"+reqBodyStr);
 
 def headObject = JSON.parseObject(reqBodyStr);
 
-String remark = headObject.getParameter("remark");
+String remark = headObject.remark;
 //String username = headObject.getParameter("username");
-String userid = headObject.getParameter("userid");
+String userid = headObject.userid;
 System.out.println("userId==>"+userid)
 //def goodString = ob.goodList
 //System.out.println(goodString);
