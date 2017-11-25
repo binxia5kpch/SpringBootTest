@@ -40,16 +40,7 @@ String reqBodyStr =  sb.toString();
 //"""
 System.out.println("reqBodStr==>"+reqBodyStr);
 
-
 def headObject = JSON.parseObject(reqBodyStr);
-System.out.println(ob.goodList);
-System.out.println("====>");
-def good =  ob.goodList
-def gdOb = JSON.parse(good);
-gdOb.each {
-    System.out.println("it==>"+it.thumb_url)
-}
-
 
 String remark = headObject.getParameter("remark");
 //String username = headObject.getParameter("username");
