@@ -20,7 +20,7 @@ String school= hs.getParameter("school")
 String isdefault= hs.getParameter("isdefault")
 def id=hs.getParameter("id")
 int defalutFlag=0
-if(isdefault){
+if(isdefault.equals("success_circle")){
     defalutFlag=1
 }
 if(addressType.equals("insert")){
