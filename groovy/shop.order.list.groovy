@@ -14,7 +14,7 @@ goodsMysql.shopMysql.eachRow("select * from shop_order where userid=?",[hs.getPa
     System.out.println(order.id);
     System.out.println(hs.getParameter("userid"));
     def orderLineList=[]
-    goodsMysql.shopMysql.eachRow("select sol.id as lineId, sg.id as goodsId,sg.title,sg.avatar_url,sg.thumb_url,sg.price,sg.market_price ,sg.mobile_category_id,sg.category_name " +
+    goodsMysql.shopMysql.eachRow("select sol.id as lineId,sol.num as buy, sg.id as goodsId,sg.title,sg.avatar_url,sg.thumb_url,sg.price,sg.market_price ,sg.mobile_category_id,sg.category_name " +
             "from shop_order_line sol left join shop_goods sg on sg.id = sol.goods_id where order_id=?",[order.id],{ line->
         //System.out.println("==>"+line.lineId)
         orderLineList<<[
@@ -26,7 +26,8 @@ goodsMysql.shopMysql.eachRow("select * from shop_order where userid=?",[hs.getPa
                 thumb_url:line.thumb_url,
                 marketPrice:line.market_price,
                 mobile_category_id:line.mobile_category_id,
-                category_name:line.category_name
+                category_name:line.category_name,
+                buy:it.buy
         ]
     })
 

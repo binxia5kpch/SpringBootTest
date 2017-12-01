@@ -44,6 +44,7 @@ if(addressType.equals("insert")){
 }else if(addressType.equals("query")){
     def addressList=[]
     goodsMysql.shopMysql.eachRow("select * from shop_user_address WHERE userid = ?",[userid],{
+        int defaultInt = it.isdefault as int
         addressList<<[
                 id:it.id,
                 userid:it.userid,
@@ -51,7 +52,7 @@ if(addressType.equals("insert")){
                 mobile:it.mobile,
                 address:it.address,
                 school:it.school,
-                isdefault:it.isdefault
+                isdefault: defaultInt==1?"success_circle":"circle"
         ]
     })
     backMap.put("addressList",addressList)
