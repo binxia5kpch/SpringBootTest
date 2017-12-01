@@ -18,6 +18,7 @@ String mobile= hs.getParameter("mobile")
 String address= hs.getParameter("address")
 String school= hs.getParameter("school")
 String isdefault= hs.getParameter("isdefault")
+def id=hs.getParameter("id")
 int defalutFlag=0
 if(isdefault){
     defalutFlag=1
@@ -34,7 +35,7 @@ if(addressType.equals("insert")){
 
     backMap.put("insertId",insertId)
 }else if(addressType.equals("delete")){
-    String id=hs.getParameter("id")
+    //String id=hs.getParameter("id")
     if(id){
         goodsMysql.shopMysql.executeUpdate("delete from shop_user_address where id=?",[id])
     }else{
@@ -57,11 +58,11 @@ if(addressType.equals("insert")){
     })
     backMap.put("addressList",addressList)
 }else if (addressType.equals("update")){
-    int updateRet = goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET username = ?,mobile=?,address=?,school=?,isdefault=? WHERE userid = ?",
-    [username,mobile,address,school,defalutFlag,userid])
+    int updateRet = goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET username = ?,mobile=?,address=?,school=?,isdefault=? WHERE id = ?",
+    [username,mobile,address,school,defalutFlag,id])
     backMap.put("updateRet",updateRet)
 }else if(addressType.equals("updateDefault")){
-    String id=hs.getParameter("id")
+    //String id=hs.getParameter("id")
     if(id){
         goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET isdefault = ? where id=?",[defalutFlag,id])
     }else{
