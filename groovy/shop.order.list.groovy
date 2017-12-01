@@ -27,7 +27,7 @@ goodsMysql.shopMysql.eachRow("select * from shop_order where userid=?",[hs.getPa
                 marketPrice:line.market_price,
                 mobile_category_id:line.mobile_category_id,
                 category_name:line.category_name,
-                buy:it.buy
+                buy:line.buy
         ]
     })
 
