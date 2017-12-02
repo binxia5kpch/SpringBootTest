@@ -103,6 +103,7 @@ public void pushMessage(def regId,def goodString){
 //title	string	可选	消息标题
 //content_type	string	可选	消息内容类型
 //extras	JSON Object	可选	JSON 格式的可选参数
+    System.out.println("pushStr===>"+JsonOutput.toJson(extra))
     PushResult result=jpushClient.sendAndroidMessageWithRegistrationID(title,JsonOutput.toJson(extra),regId);
 }
 
