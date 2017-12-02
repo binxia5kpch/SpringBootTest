@@ -76,7 +76,7 @@ goodsList?.each { it->
 
 goodsMysql.shopMysql.eachRow("select * from shop_app_info",{
     try{
-        pushMessage(it.regId,goodString);
+        pushMessage(it.regId,reqBodyStr);
     }catch(Exception e){}
 
 })
