@@ -57,7 +57,8 @@ goodsList?.each {it->
 }
 //查询用户信息
 GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
-def userInfo = goodsMysql.shopMysql.firstRow("select * from shop_user_info where userid=?",[userid])
+//def userInfo = goodsMysql.shopMysql.firstRow("select * from shop_user_info where userid=?",[userid])
+def userInfo = goodsMysql.shopMysql.firstRow("select * from shop_user_address where userid=? and isdefault=1",[userid])
 
 //设置用户信息 推送的时候传
 headObject.userInfo=userInfo
@@ -75,8 +76,9 @@ goodsList?.each { it->
     System.out.println("ret==>"+ret);
 }
 
-//推送订单消息
 
+
+//推送订单消息
 goodsMysql.shopMysql.eachRow("select * from shop_app_info",{
     try{
         def tuisongStr = JSON.toJSONString(headObject)
