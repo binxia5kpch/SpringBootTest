@@ -64,7 +64,8 @@ if(addressType.equals("insert")){
 }else if(addressType.equals("updateDefault")){
     //String id=hs.getParameter("id")
     if(id){
-        goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET isdefault = ? where id=?",[defalutFlag,id])
+        def rets = goodsMysql.shopMysql.executeUpdate("UPDATE shop_user_address SET isdefault = ? where id=?",[defalutFlag,id])
+        backMap.put("mess",rets);
     }else{
         backMap.put("mess","id 不能为空")
     }
