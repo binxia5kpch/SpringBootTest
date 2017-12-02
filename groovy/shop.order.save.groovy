@@ -42,6 +42,7 @@ System.out.println("reqBodStr==>"+reqBodyStr);
 
 def headObject = JSON.parseObject(reqBodyStr);
 
+
 String remark = headObject.remark;
 //String username = headObject.getParameter("username");
 String userid = headObject.userid;
@@ -58,6 +59,8 @@ goodsList?.each {it->
 GoodsMysql goodsMysql = BeanUtils.getBean("goodsMysql")
 def userInfo = goodsMysql.shopMysql.firstRow("select * from shop_user_info where userid=?",[userid])
 
+//设置用户信息 推送的时候传
+headObject.userInfo=userInfo
 System.out.println("userInfo==>"+userInfo);
 //保存主表：
 
@@ -76,7 +79,8 @@ goodsList?.each { it->
 
 goodsMysql.shopMysql.eachRow("select * from shop_app_info",{
     try{
-        pushMessage(it.regId,reqBodyStr);
+        def tuisongStr = JSON.toJSONString(headObject)
+        pushMessage(it.regId,tuisongStr);
     }catch(Exception e){}
 
 })
